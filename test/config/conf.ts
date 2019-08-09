@@ -10,7 +10,7 @@ export let config: Config = {
   framework: 'jasmine',
 
   suites: {
-    SampleTest: ['../e2e/test.js'],
+    SampleTest: ['../e2e/test.js']
   },
 
   jasmineNodeOpts: {
