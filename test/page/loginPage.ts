@@ -1,6 +1,6 @@
 import {by, element, browser} from "protractor";
 
-export class LoginPage {
+export class LoginPage extends BasePage{
   emailAddress = element(by.id('email'));
   password = element(by.id('password'));
   loginButton = element(by.css('[type="submit"]'));

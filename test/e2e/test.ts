@@ -1,5 +1,6 @@
 import {browser} from "protractor";
 import {LoginPage} from '../page/loginPage';
+import { SchemaPage } from "../page/schemaPage";
 
 describe("Login test", function() {
     let loginPage = new LoginPage();
@@ -10,6 +11,7 @@ describe("Login test", function() {
 
   it('1@simple test', async function(done) {
       done();
+      new SchemaPage().clickCreateNewSchema();
   })
   
 })
