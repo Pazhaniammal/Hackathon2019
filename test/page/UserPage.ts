@@ -1,13 +1,14 @@
 import { element, by, browser } from "protractor";
 import { BasePage } from "./basePage";
 
-export class SchemaPage extends BasePage {
-     createButton = element(by.xpath("//button[text()='Create New Schema']"));
+export class UserPage extends BasePage {
+     createButton = element(by.xpath("//button[text()='Create Organization']"));
 
      /**
-      * Click create new Schema button
+      * Click create new user button
       */
-    async clickCreateNewSchema() {
+    async clickCreateNewUser() {
+    
         browser.waitForAngularEnabled(false);
         this.createButton.click();
     }

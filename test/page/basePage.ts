@@ -11,5 +11,13 @@ export class BasePage {
         let dropDownElement = element(by.id(idName));
         await dropDownElement.element(by.css('[value="' + dropDownvalue + '"]')).click();
         // await element.element(by.css('[value="' + dropDownvalue + '"]')).click();     
-}
+    }
+
+    /**
+     * Click Logout 
+     */
+    async clickLogout() {
+        element(by.id('user-dropdown')).click();
+        element(by.xpath("//li[text()='Logout']")).click();
+    }
 }
