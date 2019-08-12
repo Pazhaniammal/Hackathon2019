@@ -1,5 +1,5 @@
 import {by, element, browser} from "protractor";
-
+import { BasePage } from "./basePage";
 export class LoginPage extends BasePage{
   emailAddress = element(by.id('email'));
   password = element(by.id('password'));

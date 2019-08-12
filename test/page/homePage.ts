@@ -1,7 +1,11 @@
 import { element, by } from "protractor";
-
+import { BasePage } from "./basePage";
 export class HomePage extends BasePage {
-    constructor() {
-        super();
-    }
+   
+
+    async clickMenuLink(menuItemName :string){
+        let emailAddress = element(by.xpath(`//span[@title='${menuItemName}']`));
+        emailAddress.click();
+     }
+
 }

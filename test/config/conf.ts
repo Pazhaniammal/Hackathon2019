@@ -5,14 +5,17 @@ export let config: Config = {
 
   capabilities: {
     'browserName': 'chrome',
-  
-  },
+    'chromeOptions': {
+    // // 'args': ['show-fps-counter=true', '--no-sandbox']
+    'args': ['--disable-gpu', '--no-sandbox']
+    },
+    },
   
 
   framework: 'jasmine',
 
   suites: {
-    SampleTest: ['../e2e/test.js'],
+    SampleTest: ['../e2e/createSchecme.js'],
   },
 
   jasmineNodeOpts: {
@@ -27,6 +30,5 @@ export let config: Config = {
 
   onPrepare: () => {
    browser.manage().window().maximize();
-   browser.manage().timeouts().implicitlyWait(5000);
  }
 }
