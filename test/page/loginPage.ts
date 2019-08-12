@@ -5,6 +5,11 @@ export class LoginPage extends BasePage{
   password = element(by.id('password'));
   loginButton = element(by.css('[type="submit"]'));
 
+  /**
+   * login into application  
+   * @param email 
+   * @param password 
+   */
   async loginIntoApplication(email : string, password : string) {
     browser.waitForAngularEnabled(false);
     await browser.get(browser.params.baseUrl);

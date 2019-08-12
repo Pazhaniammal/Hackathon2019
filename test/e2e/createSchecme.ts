@@ -7,17 +7,18 @@ import { OrganizationPage } from "../page/OrganizationPage";
 import { CreateOrganization } from "../page/createOrganization";
 import { CreateUserPage } from "../page/createUserPage";
 import { UserPage } from "../page/UserPage";
+import { ValidateForm } from "../page/validate-form-page";
 
 describe("Login test", function() {
     let loginPage = new LoginPage();
     let createSchemaPage = new CreatSchemaPage();
     let homePage = new HomePage();
+    let validateForm = new ValidateForm();
 
   beforeAll( function() {
     loginPage.loginIntoApplication(browser.params.superAdminEmailAddress,browser.params.superAdminPassword);
   });
 
-    
   it('1@Click Organization page', async function() {
     await homePage.clickMenuLink("Organization");
    })
@@ -30,10 +31,9 @@ describe("Login test", function() {
        
   it('3@Go to User Page', async function() {
     await homePage.clickMenuLink("Users");
-  
-   })
+  })
    
-   it('2@Create new User', async () => {
+   it('4@Create new User', async () => {
       let userPage = new UserPage();
       userPage.clickCreateNewUser();
       let create = new CreateUserPage();
@@ -41,15 +41,15 @@ describe("Login test", function() {
     })
 
   
-    
-  it('1@Click Create Scheme', async function() {
+  it('1@Click Create Scheme', async function(done) {
+   let homePage = new HomePage();
    await homePage.clickMenuLink("Schemas");
-   
+   browser.sleep(3000);
+   done();
   })
   
   it('2@Create new schema', async () => {
     new SchemaPage().clickCreateNewSchema();
-
    })
 
    it('2@Fill formName', async function() {
@@ -84,6 +84,7 @@ describe("Login test", function() {
 
   })
 
+  
   it('6@Add text area field', async function() {
     createSchemaPage.dragAndDrop("Text Area");
     createSchemaPage.fillLabelName("Address");
@@ -94,6 +95,13 @@ describe("Login test", function() {
     createSchemaPage.clickCreateForm();
     new SchemaPage().clickLogout();
 
+  })
+
+  it('2@check the form', async function() {
+    await validateForm.clickSchemaToCheckForm("kiranForm");
+    browser.sleep(4000);
+    expect(validateForm.fieldIsPresent("firstName")).toBeTruthy();
+    expect(validateForm.fieldIsPresent("contact")).toBeTruthy();
   })
    
 })
