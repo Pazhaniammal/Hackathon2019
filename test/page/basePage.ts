@@ -10,14 +10,25 @@ export class BasePage {
 
         let dropDownElement = element(by.id(idName));
         await dropDownElement.element(by.css('[value="' + dropDownvalue + '"]')).click();
+        console.log(dropDownvalue+" is selected")
+
         // await element.element(by.css('[value="' + dropDownvalue + '"]')).click();     
     }
 
     /**
      * Click Logout 
      */
-    async clickLogout() {
+     clickLogout() {
+         browser.sleep(3000);
         element(by.id('user-dropdown')).click();
         element(by.xpath("//li[text()='Logout']")).click();
+        console.log("Logout link is clicked")
+
+    }
+      /**
+     * Click Logout 
+     */
+    async closeToastMessgae() {
+        element(by.css('button[aria-label*="close"] ')).click();
     }
 }

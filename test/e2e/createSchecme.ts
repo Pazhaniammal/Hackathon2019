@@ -8,24 +8,37 @@ import { CreateOrganization } from "../page/createOrganization";
 import { CreateUserPage } from "../page/createUserPage";
 import { UserPage } from "../page/UserPage";
 import { ValidateForm } from "../page/validate-form-page";
+import { async } from "q";
 
-describe("Login test", function() {
+describe("Create Organization test", function() {
     let loginPage = new LoginPage();
     let createSchemaPage = new CreatSchemaPage();
     let homePage = new HomePage();
     let validateForm = new ValidateForm();
+    let currentTime = new Date().getTime();
+    let organizationName = "org" + (currentTime);
+    let organizationEmail = "org" + (currentTime)+ ("@gmail.com");
+    let organizationApplication = "app"+ (currentTime);
+    let userFirstName = "fn"+  (currentTime);
+    let userlastName = "ln"+ (currentTime);
+    let userId = "user"+ (currentTime);
+    let userEmail = "user"+ (currentTime)+("@gmail.com");
+    let userPassword = "pw"+ (currentTime);
+    let formName = "test_" + currentTime;
 
   beforeAll( function() {
+    console.log("name" + currentTime)
+    console.log("name" + organizationName)
     loginPage.loginIntoApplication(browser.params.superAdminEmailAddress,browser.params.superAdminPassword);
   });
 
-  it('1@Click Organization page', async function() {
+  it('1@Go to Organization page', async function() {
     await homePage.clickMenuLink("Organization");
    })
    
    it('2@Create new Organization', async () => {
     await new OrganizationPage().clickCreateNewOrganization();
-    await new CreateOrganization().createNewOrganization("Apollo", "apollo@gmail.com", "HMS");
+    await new CreateOrganization().createNewOrganization(organizationName, organizationEmail, organizationApplication);
 
     })
        
@@ -35,73 +48,80 @@ describe("Login test", function() {
    
    it('4@Create new User', async () => {
       let userPage = new UserPage();
-      userPage.clickCreateNewUser();
-      let create = new CreateUserPage();
-      create.createNewUser("nijin","qa","jin","nijin","wipro", "superuser", "test")
+      await userPage.clickCreateNewUser();
+      await new CreateUserPage().createNewUser(userFirstName,userlastName,userId,userEmail,organizationName, "superuser",userPassword)
     })
 
-  
-  it('1@Click Create Scheme', async function(done) {
-   let homePage = new HomePage();
+    it('5@Logout', async() => {
+      await homePage.clickLogout();
+    })
+
+    it('6@Login as first organisation', async() => {
+      console.log("userEmail" +userEmail)
+     await loginPage.loginIntoApplication(userEmail, userPassword);
+    })  
+
+  it('7@Click  Scheme Link', async() => {
    await homePage.clickMenuLink("Schemas");
-   browser.sleep(3000);
-   done();
   })
   
-  it('2@Create new schema', async () => {
-    new SchemaPage().clickCreateNewSchema();
+  it('8@Create new schema Link', async () => {
+    await new SchemaPage().clickCreateNewSchema();
    })
 
-   it('2@Fill formName', async function() {
-       createSchemaPage.fillPrefix("TESTFORM");
-       createSchemaPage.fillFormName("test1213");
-       createSchemaPage.fillDropdown("form_type","Ticket");
-       createSchemaPage.fillDropdown("template_type","Application Form");
-       createSchemaPage.fillDropdown("data_type","Instance");
-       browser.sleep(2000);
-   })
 
-   it('3@Add Form text field', async function() {
-       createSchemaPage.dragAndDrop("Text Field");
+  it('9@Fill form name', async () => {
+    createSchemaPage.fillPrefix("SCWIPRO");
+    console.log("formName is --- " + formName)
+    createSchemaPage.fillFormName(formName);
+    createSchemaPage.fillDropdown("form_type","Ticket");
+    createSchemaPage.fillDropdown("template_type","Application Form");
+    createSchemaPage.fillDropdown("data_type","Instance");  
+ })
+
+    it('10@Add Form text field', async function() {
+        await createSchemaPage.dragAndDrop("Text Field");
        createSchemaPage.fillLabelName("Name");
        createSchemaPage.clickSaveButton();
    })
 
-   it('4@Add Form Number field', async function() {
-    createSchemaPage.dragAndDrop("Number");
+
+    it('11@Add Form Number field', async function() {
+    await createSchemaPage.dragAndDrop("Number");
     createSchemaPage.fillLabelName("Contact number");
     createSchemaPage.clickSaveButton();
 
   })
 
-  it('5@Add Radio button field', async function() {
-       createSchemaPage.dragAndDrop("Radio");
+    it('12@Add Radio button field', async function() {
+       await createSchemaPage.dragAndDrop("Radio");
        createSchemaPage.fillLabelName("Gender");
        createSchemaPage.addRadioButtonName("Male", "0");
        createSchemaPage.clickAddAnotherRow();
        createSchemaPage.addRadioButtonName("Female", "1");
        createSchemaPage.clickSaveButton();
-
-  })
-
+    })
   
-  it('6@Add text area field', async function() {
-    createSchemaPage.dragAndDrop("Text Area");
+  it('13@Add text area field', async function() {
+    await createSchemaPage.dragAndDrop("Text Area");
     createSchemaPage.fillLabelName("Address");
     createSchemaPage.clickSaveButton();
   })
 
-  it('6@Create new Form', async function() {
-    createSchemaPage.clickCreateForm();
+  it('14@Create new Form', async function() {
+    await createSchemaPage.clickCreateForm();
+    browser.sleep(20000);
     new SchemaPage().clickLogout();
 
   })
 
-  it('2@check the form', async function() {
-    await validateForm.clickSchemaToCheckForm("kiranForm");
-    browser.sleep(4000);
-    expect(validateForm.fieldIsPresent("firstName")).toBeTruthy();
-    expect(validateForm.fieldIsPresent("contact")).toBeTruthy();
-  })
+
+
+  // it('2@check the form', async function() {
+  //   await validateForm.clickSchemaToCheckForm("kiranForm");
+  //   browser.sleep(4000);
+  //   expect(validateForm.fieldIsPresent("firstName")).toBeTruthy();
+  //   expect(validateForm.fieldIsPresent("contact")).toBeTruthy();
+  // })
    
 })

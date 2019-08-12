@@ -3,6 +3,7 @@ import { BasePage } from "./basePage";
 
 export class OrganizationPage extends BasePage {
     createButton = element(by.xpath("//button[text()='Create Organization']"));
+    
 
     /**
      * Click create new Organization button

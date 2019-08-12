@@ -1,4 +1,4 @@
-import { element, by, browser } from "protractor";
+import { element, by, browser , protractor} from "protractor";
 import { BasePage } from "./basePage";
 
 export class SchemaPage extends BasePage {
@@ -9,6 +9,8 @@ export class SchemaPage extends BasePage {
       */
     async clickCreateNewSchema() {
         browser.waitForAngularEnabled(false);
-        this.createButton.click();
+        var until = protractor.ExpectedConditions;
+        browser.wait(until.elementToBeClickable(this.createButton),3000); 
+        await this.createButton.click();
     }
 }

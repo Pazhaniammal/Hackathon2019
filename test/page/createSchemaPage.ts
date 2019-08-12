@@ -1,6 +1,6 @@
 
 import { BasePage } from "./basePage";
-import { element, by, browser } from "protractor";
+import { element, by, browser, protractor } from "protractor";
 export class CreatSchemaPage extends BasePage{
     prefix = element(by.id('prefix'));
     formName = element(by.id('name'));
@@ -13,8 +13,12 @@ export class CreatSchemaPage extends BasePage{
      * @param prefixValue 
      */
     async fillPrefix(prefixValue : string){
+        var until = protractor.ExpectedConditions;
+        browser.wait(until.elementToBeClickable(this.prefix),3000); 
     browser.waitForAngularEnabled(false);
     this.prefix.sendKeys(prefixValue);
+    console.log(prefixValue+" is filled")
+
     }
 
     /**
@@ -22,8 +26,12 @@ export class CreatSchemaPage extends BasePage{
      * @param formName 
      */
     async fillFormName(formName : string){
+        var until = protractor.ExpectedConditions;
+        browser.wait(until.elementToBeClickable(this.formName),3000); 
     browser.waitForAngularEnabled(false);
     this.formName.sendKeys(formName);
+    console.log(formName+" is filled")
+
     }
 
     /**
@@ -33,7 +41,8 @@ export class CreatSchemaPage extends BasePage{
     async fillDropdown(id : string , value : string){
         browser.waitForAngularEnabled(false);
         this.selectDropDownOptionById(id, value)
-        
+        console.log(value+" is selected")
+
     }
 
     /**
@@ -51,7 +60,8 @@ export class CreatSchemaPage extends BasePage{
      * @param LabelName 
      */
     async fillLabelName(labelText : string){
-        browser.sleep(3000)
+        var until = protractor.ExpectedConditions;
+        browser.wait(until.elementToBeClickable(this.labelName),3000); 
         browser.waitForAngularEnabled(false);
         this.labelName.click();
         this.labelName.clear();
@@ -65,6 +75,8 @@ export class CreatSchemaPage extends BasePage{
      */
     async fillLabelPosition (value : string){
         browser.waitForAngularEnabled(false);
+        var until = protractor.ExpectedConditions;
+        browser.wait(until.elementToBeClickable(this.labelPosition),3000); 
         this.labelPosition.click();
         element(by.xpath(`//span[text()='${value}']`)).click();
     }
@@ -100,8 +112,11 @@ export class CreatSchemaPage extends BasePage{
      * Click Create Form button
      */
     async clickCreateForm() {
-    let createButton = element(by.partialButtonText("Create Form"));
-    createButton.click();
+        let submitButton = element(by.id("submit"));
+        submitButton.click();
+        browser.sleep(3000);
+        let createButton = element(by.partialButtonText("Create Form"));
+        createButton.click();
     }
     
 }

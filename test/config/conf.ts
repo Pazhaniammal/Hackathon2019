@@ -11,7 +11,6 @@ export let config: Config = {
     },
     },
   
-
   framework: 'jasmine',
 
   suites: {
@@ -29,6 +28,7 @@ export let config: Config = {
   },
 
   onPrepare: () => {
+
    browser.manage().window().maximize();
  }
 }

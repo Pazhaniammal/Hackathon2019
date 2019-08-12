@@ -1,4 +1,4 @@
-import {element, by, browser} from "protractor";
+import {element, by, browser, protractor, ElementFinder} from "protractor";
 import { BasePage } from "./basePage";
 
 export class CreateOrganization extends BasePage{
@@ -8,9 +8,15 @@ export class CreateOrganization extends BasePage{
     submitButton = element(by.id('submit'));
 
     async createNewOrganization(oraganizationName: string, oraganizationEmail: string, oraganizationApplicationName: string) {
+       var until = protractor.ExpectedConditions;
+       browser.wait(until.elementToBeClickable(this.name),3000);        
        await this.name.sendKeys(oraganizationName);
        this.email.sendKeys(oraganizationEmail);
        this.applicationName.sendKeys(oraganizationApplicationName);
        await this.submitButton.click();
+       console.log(oraganizationName+" is created successfully")
+
+    //    this.closeToastMessgae();
     }
+
 }
