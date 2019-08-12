@@ -7,7 +7,8 @@ export class CreatSchemaPage extends BasePage{
     dropdown = element(by.id('form_type'));
     labelName = element(by.name('data[label]'));
     labelPosition = element(by.css('div[class*="labelPosition"]> div'));
-    
+    submitButton = element(by.id("submit"))
+    createButton = element(by.partialButtonText("Create Form"))
     /**
      * to fill the prefix value in in the create schema page
      * @param prefixValue 
@@ -63,9 +64,9 @@ export class CreatSchemaPage extends BasePage{
         var until = protractor.ExpectedConditions;
         browser.wait(until.elementToBeClickable(this.labelName),3000); 
         browser.waitForAngularEnabled(false);
-        this.labelName.click();
-        this.labelName.clear();
-        this.labelName.sendKeys(labelText);
+        await this.labelName.click();
+        await this.labelName.clear();
+        await this.labelName.sendKeys(labelText);
     }
     
     
@@ -78,7 +79,7 @@ export class CreatSchemaPage extends BasePage{
         var until = protractor.ExpectedConditions;
         browser.wait(until.elementToBeClickable(this.labelPosition),3000); 
         this.labelPosition.click();
-        element(by.xpath(`//span[text()='${value}']`)).click();
+        await element(by.xpath(`//span[text()='${value}']`)).click();
     }
 
     /**
@@ -88,7 +89,7 @@ export class CreatSchemaPage extends BasePage{
      */
     async addRadioButtonName(radiobuttonName : string, rowValue: string) {
         let radioButtonName = element(by.css(`input[name*="[${rowValue}][label]"]`));
-        radioButtonName.sendKeys(radiobuttonName);
+        await radioButtonName.sendKeys(radiobuttonName);
 
     }
 
@@ -97,7 +98,7 @@ export class CreatSchemaPage extends BasePage{
      */
     async clickAddAnotherRow() {
         let saveButton = element(by.css('button[class*="add-row"]'));
-        saveButton.click();
+       await  saveButton.click();
     }
 
     /**
@@ -105,18 +106,17 @@ export class CreatSchemaPage extends BasePage{
      */
     async clickSaveButton(){
     let saveButton = element(by.className("btn btn-success"));
-    saveButton.click();
+    await saveButton.click();
     }
 
     /**
      * Click Create Form button
      */
     async clickCreateForm() {
-        let submitButton = element(by.id("submit"));
-        submitButton.click();
-        browser.sleep(3000);
-        let createButton = element(by.partialButtonText("Create Form"));
-        createButton.click();
+        var until = protractor.ExpectedConditions;
+        browser.wait(until.elementToBeClickable(this.submitButton),5000); 
+        await this.submitButton.click();
+        await this.createButton.click();
     }
     
 }

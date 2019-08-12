@@ -1,4 +1,4 @@
-import { browser, element, by, ElementFinder } from "protractor";
+import { browser, element, by, ElementFinder, protractor } from "protractor";
 
 export class BasePage {
     /**
@@ -6,6 +6,12 @@ export class BasePage {
      * @param idName 
      * @param dropDownvalue 
      */
+
+      clickDropdown = element(by.id('user-dropdown'));
+      clickLogoutButton = element(by.xpath("//li[text()='Logout']"));
+        text =element(by.xpath("//li[text()='Logout']"));
+
+
     async selectDropDownOptionById(idName : string  , dropDownvalue: string) {
 
         let dropDownElement = element(by.id(idName));
@@ -18,17 +24,27 @@ export class BasePage {
     /**
      * Click Logout 
      */
-     clickLogout() {
-         browser.sleep(3000);
-        element(by.id('user-dropdown')).click();
-        element(by.xpath("//li[text()='Logout']")).click();
-        console.log("Logout link is clicked")
+     async clickLogout() {
+        var until = protractor.ExpectedConditions;
+        await browser.wait(until.elementToBeClickable(this.clickDropdown),5000);   
+        await this.clickDropdown.click();
+        await browser.wait(until.elementToBeClickable(this.text),5000);  
+       await this.text.click();
+         console.log("Logout Clicked")
+
 
     }
-      /**
-     * Click Logout 
-     */
+    //   /**
+    //  * Click Logout 
+    //  */
+    // async closeToastMessgae() {
+    //     element(by.css('button[aria-label*="close"] ')).click();
+    // }
+
     async closeToastMessgae() {
-        element(by.css('button[aria-label*="close"] ')).click();
-    }
+        let toast = element(by.css('.Toastify button'));
+        var until = protractor.ExpectedConditions;
+       await browser.wait(until.elementToBeClickable(toast),5000);   
+        await toast.click();
+}
 }

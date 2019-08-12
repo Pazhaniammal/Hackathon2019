@@ -1,4 +1,4 @@
-import { element, by, browser } from "protractor";
+import { element, by, browser, protractor } from "protractor";
 
 export class ValidateForm {
   

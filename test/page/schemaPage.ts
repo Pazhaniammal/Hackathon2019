@@ -10,7 +10,7 @@ export class SchemaPage extends BasePage {
     async clickCreateNewSchema() {
         browser.waitForAngularEnabled(false);
         var until = protractor.ExpectedConditions;
-        browser.wait(until.elementToBeClickable(this.createButton),3000); 
+        browser.wait(until.elementToBeClickable(this.createButton),5000); 
         await this.createButton.click();
     }
 }

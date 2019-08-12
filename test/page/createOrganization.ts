@@ -14,9 +14,8 @@ export class CreateOrganization extends BasePage{
        this.email.sendKeys(oraganizationEmail);
        this.applicationName.sendKeys(oraganizationApplicationName);
        await this.submitButton.click();
+       await this.closeToastMessgae();
        console.log(oraganizationName+" is created successfully")
-
-    //    this.closeToastMessgae();
     }
 
 }

@@ -19,14 +19,15 @@ export class CreateUserPage extends BasePage{
          browser.waitForAngularEnabled(false);
         var until = protractor.ExpectedConditions;
         browser.wait(until.elementToBeClickable(this.firstName),3000); 
-        this.firstName.sendKeys(userFirstName);
-        this.lastName.sendKeys(userLastName);
-        this.userName.sendKeys(userId);
-        this.email.sendKeys(userEmail);
-        this.selectFromDropDown(this.organizationElement, userOrganization);
-        this.selectRoles(userRole);
-        this.password.sendKeys(userPassword);
-        this.clickSubmit.click();
+       await this.firstName.sendKeys(userFirstName);
+       await this.lastName.sendKeys(userLastName);
+       await this.userName.sendKeys(userId);
+       await this.email.sendKeys(userEmail);
+       await this.selectFromDropDown(this.organizationElement, userOrganization);
+       await this.selectRoles(userRole);
+       await this.password.sendKeys(userPassword);
+       await this.clickSubmit.click();
+       await this.closeToastMessgae();
         console.log(userFirstName+" is created successfully")
 
 
@@ -55,8 +56,8 @@ export class CreateUserPage extends BasePage{
         browser.sleep(3000);
         browser.waitForAngularEnabled(false);
         this.userRolesField.click();
-        element(by.xpath(`//span[text()='${value}']`)).click();
-        element(by.css('div[class*="user_roles"]> div')).click();
+        await element(by.xpath(`//span[text()='${value}']`)).click();
+        await element(by.css('div[class*="user_roles"]> div')).click();
     }
    
 }
