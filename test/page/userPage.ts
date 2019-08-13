@@ -9,7 +9,7 @@ export class UserPage extends BasePage {
       */
     async clickCreateNewUser() {
         browser.waitForAngularEnabled(false);
-        browser.sleep(4000);
+       this.waitForpageLoad(this.createButton);
         this.createButton.click();
     }
 }

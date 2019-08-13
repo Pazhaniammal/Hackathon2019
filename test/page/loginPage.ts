@@ -14,9 +14,9 @@ export class LoginPage extends BasePage{
     browser.waitForAngularEnabled(false);
     await browser.get(browser.params.baseUrl);
     this.emailAddress.sendKeys(email);
-    console.log( email + "is entered");
+    console.log( email + " --is entered");
     this.password.sendKeys(password);
-    console.log( password + "is entered");
+    console.log( password + " ----is entered");
     await this.loginButton.isEnabled();
     this.loginButton.click();
     browser.sleep(3000);

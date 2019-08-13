@@ -8,8 +8,7 @@ export class CreateOrganization extends BasePage{
     submitButton = element(by.id('submit'));
 
     async createNewOrganization(oraganizationName: string, oraganizationEmail: string, oraganizationApplicationName: string) {
-       var until = protractor.ExpectedConditions;
-       browser.wait(until.elementToBeClickable(this.name),3000);        
+       this.waitForpageLoad(this.name);
        await this.name.sendKeys(oraganizationName);
        this.email.sendKeys(oraganizationEmail);
        this.applicationName.sendKeys(oraganizationApplicationName);

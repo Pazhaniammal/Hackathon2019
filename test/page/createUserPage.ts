@@ -15,10 +15,7 @@ export class CreateUserPage extends BasePage{
 
     async createNewUser(userFirstName: string, userLastName: string, userId: string, 
         userEmail: string, userOrganization: string, userRole: string, userPassword: string) {
-         browser.sleep(3000);
-         browser.waitForAngularEnabled(false);
-        var until = protractor.ExpectedConditions;
-        browser.wait(until.elementToBeClickable(this.firstName),3000); 
+            this.waitForpageLoad(this.firstName);
        await this.firstName.sendKeys(userFirstName);
        await this.lastName.sendKeys(userLastName);
        await this.userName.sendKeys(userId);
@@ -28,8 +25,7 @@ export class CreateUserPage extends BasePage{
        await this.password.sendKeys(userPassword);
        await this.clickSubmit.click();
        await this.closeToastMessgae();
-        console.log(userFirstName+" is created successfully")
-
+     console.log(userFirstName+" is created successfully")
 
     }
      

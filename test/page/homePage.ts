@@ -7,7 +7,7 @@ export class HomePage extends BasePage {
         browser.sleep(3000);
         let menu = element(by.xpath(`//span[@title='${menuItemName}']`));
         await menu.click();
-        console.log(menuItemName + "is clicked")
+        console.log(menuItemName + " --is clicked")
      }
     }
     

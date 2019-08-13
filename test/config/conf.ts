@@ -14,7 +14,10 @@ export let config: Config = {
   framework: 'jasmine',
 
   suites: {
-    SampleTest: ['../e2e/createSchecme.js'],
+    SampleTest: [
+      '../e2e/createFirstSchema.js', 
+    '../e2e/createSecondSchema.js',
+    '../e2e/validateSchemaShouldBeAccessableForCorrespondingUsers.js'],
   },
 
   jasmineNodeOpts: {
@@ -30,5 +33,6 @@ export let config: Config = {
   onPrepare: () => {
 
    browser.manage().window().maximize();
+   
  }
 }

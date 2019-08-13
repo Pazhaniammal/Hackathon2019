@@ -1,6 +1,7 @@
 import { element, by, browser, protractor } from "protractor";
+import { BasePage } from "./basePage";
 
-export class ValidateForm {
+export class ValidateForm extends BasePage{
   
     /**
      * click specific schema to view the form
